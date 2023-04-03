@@ -9,6 +9,11 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-.fio {
-    width: 250px;
+.list {
+    width: 50%;
+}
+
+.countener {
+    width: 1000px;
+    display: flex;
 }
