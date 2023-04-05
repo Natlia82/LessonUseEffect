@@ -1,7 +1,9 @@
 import ListGroup from 'react-bootstrap/ListGroup';
 import Card from 'react-bootstrap/Card';
-import React, {useState, useEffect, useRef} from "react";
+import React, {useState, useEffect, useRef, createContext } from "react";
 import Details from './Details';
+//import context from 'react-bootstrap/esm/AccordionContext';
+import AuthContext from '../context/AuthContext';
 
 function List() {
     const [fio, setFio] = useState([]);
@@ -9,7 +11,9 @@ function List() {
     const [img, setImg] = useState({});
     const [id, setId] = useState(0);
     const [loading, setLoading] = useState(false);
+    const [text, setText] = useState("");
     const timestampRef =useRef();
+   
 
     useEffect(() => {
         
@@ -54,6 +58,7 @@ function List() {
         if (id != kod) {
             setUrl("https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/hooks-context/use-effect/data/"+kod+".json");
             setId(kod);
+            setText("Идет загрузка.."); 
         }
         
     };
@@ -68,20 +73,11 @@ function List() {
         </div>
         {loading? 
         <div className='list'>
-            <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={img.avatar} />
-                <Card.Body>
-                    <Card.Title>{img.name}</Card.Title>
-                </Card.Body>
-                <ListGroup className="list-group-flush">
-                    <ListGroup.Item>city: {img.details.city}</ListGroup.Item>
-                    <ListGroup.Item>company: {img.details.company}</ListGroup.Item>
-                    <ListGroup.Item>position: {img.details.position}</ListGroup.Item>
-                </ListGroup>
-      
-            </Card>
+          <AuthContext.Provider value={img}>
+                    <Details id={img.kod} name={img.name} ></Details>
+          </AuthContext.Provider> 
             
-        </div>: <div>Идет загрузка..</div> }
+        </div>: <div>{text}</div> }
       </div>
      
         

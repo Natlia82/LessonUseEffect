@@ -1,27 +1,27 @@
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
-import React from 'react';
+import React, {createContext, useContext} from 'react';
+import AuthContext from '../context/AuthContext';
 
 
 function Details(props) {
-    const {detals} = props;
+   
+  const img = useContext(AuthContext);
   return (
-    <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={detals.avatar} />
-      <Card.Body>
-        <Card.Title>{detals.name}</Card.Title>
-       
-      </Card.Body>
-      <ListGroup className="list-group-flush">
-       
-      </ListGroup>
+            <Card style={{ width: '18rem' }}>
+                <Card.Img variant="top" src={img.avatar} />
+                <Card.Body>
+                    <Card.Title>{img.name}</Card.Title>
+                </Card.Body>
+                <ListGroup className="list-group-flush">
+                    <ListGroup.Item>city: {img.details.city}</ListGroup.Item>
+                    <ListGroup.Item>company: {img.details.company}</ListGroup.Item>
+                    <ListGroup.Item>position: {img.details.position}</ListGroup.Item>
+                </ListGroup>
       
-    </Card>
+            </Card>
   );
 }
 
 export default Details;
 
-/* <ListGroup.Item>city: {detals.details.city}</ListGroup.Item>
-        <ListGroup.Item>company: {detals.details.company}</ListGroup.Item>
-        <ListGroup.Item>position: {detals.details.position}</ListGroup.Item>*/
